@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Finanza Org - Dashboard</title>
+</head>
+<body>
 
+    <header>
+        <h1>Finanza Org</h1> <nav>
+            <a href="metas.html">Metas</a> </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Reserva de Emergência</h2>
+            <figure>
+                </figure>
+            <dl>
+                <dt>Salário</dt>
+                <dd>R$ 5.000,00</dd>
+                <dt>Sobra</dt>
+                <dd><output>R$ 500,00</output></dd>
+            </dl>
+        </section>
+
+        <section>
+            <h2>Suas Metas</h2>
+            <ul>
+                <li>
+                    <article>
+                        <h3>Viagem de Férias</h3>
+                        <progress value="50" max="100"></progress>
+                    </article>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>🔒 Seus dados estão protegidos por criptografia.</p>
+    </footer>
+
+</body>
+</html>
