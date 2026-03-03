@@ -1,44 +1,91 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finanza Org - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>Finanza Org</h1> <nav>
-            <a href="metas.html">Metas</a> </nav>
-    </header>
+    <div class="dashboard-container">
+        
+        <header>
+            <div class="logo-container">
+                <img src="image_60d3c3.jpg" alt="Logo Finanza Org" class="logo-img">
+                <h1>FINANZA <span>ORG</span></h1>
+            </div>
+            
+            <nav>
+                <a href="metas.html">Metas</a>
+                <a href="despesas.html">Despesas</a>
+            </nav>
+        </header>
 
-    <main>
-        <section>
-            <h2>Reserva de Emergência</h2>
-            <figure>
-                </figure>
-            <dl>
-                <dt>Salário</dt>
-                <dd>R$ 5.000,00</dd>
-                <dt>Sobra</dt>
-                <dd><output>R$ 500,00</output></dd>
-            </dl>
-        </section>
+        <main>
+            <section class="card form-card">
+                <h2>Calculadora Mensal</h2>
+                <p>Insira seus valores para descobrir sua sobra.</p>
+                
+                <div class="input-group">
+                    <label for="salario">Salário / Receitas (R$)</label>
+                    <input type="number" id="salario" placeholder="Ex: 5000">
+                </div>
 
-        <section>
-            <h2>Suas Metas</h2>
-            <ul>
-                <li>
-                    <article>
-                        <h3>Viagem de Férias</h3>
-                        <progress value="50" max="100"></progress>
-                    </article>
-                </li>
-            </ul>
-        </section>
-    </main>
+                <div class="input-group">
+                    <label for="despesas">Despesas Totais (R$)</label>
+                    <input type="number" id="despesas" placeholder="Ex: 3500">
+                </div>
 
-    <footer>
-        <p>🔒 Seus dados estão protegidos por criptografia.</p>
-    </footer>
+                <button type="button" class="btn-calcular" id="btn-calcular">Calcular Sobra</button>
+            </section>
 
+            <section class="card result-card">
+                <h2>Reserva e Metas</h2>
+                
+                <dl class="resumo-valores">
+                    <dt>Sobra Estimada:</dt>
+                    <dd class="destaque" id="resultado-sobra">R$ 0,00</dd> 
+                </dl>
+
+                <h3>Viagem de Férias</h3>
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80" alt="Foto de uma praia tropical" class="img-meta">
+                
+                <progress value="50" max="100"></progress>
+                <p class="legenda-progresso">50% concluído</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>🔒 Seus dados estão protegidos e não são enviados para nenhum servidor.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const inputSalario = document.getElementById('salario');
+        const inputDespesas = document.getElementById('despesas');
+        const btnCalcular = document.getElementById('btn-calcular');
+        const resultadoSobra = document.getElementById('resultado-sobra');
+
+        btnCalcular.addEventListener('click', function() {
+            const valorSalario = parseFloat(inputSalario.value) || 0;
+            const valorDespesas = parseFloat(inputDespesas.value) || 0;
+            const sobra = valorSalario - valorDespesas;
+
+            const valorFormatado = sobra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            resultadoSobra.textContent = valorFormatado;
+
+            resultadoSobra.classList.remove('texto-positivo', 'texto-negativo', 'texto-neutro');
+
+            if (sobra > 0) {
+                resultadoSobra.classList.add('texto-positivo');
+            } else if (sobra < 0) {
+                resultadoSobra.classList.add('texto-negativo');
+            } else {
+                resultadoSobra.classList.add('texto-neutro');
+            }
+        });
+    </script>
 </body>
 </html>
