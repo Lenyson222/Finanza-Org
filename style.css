@@ -1,7 +1,8 @@
+
 :root {
     --azul-fundo: #0B1D3A; 
     --azul-card: #142B4E;  
-    --azul-cabecalho-input: #1A3A6C; /* Novo azul para os cabeçalhos dos inputs */
+    --azul-cabecalho-input: #1A3A6C; 
     --verde-folha: #27AE60; 
     --verde-escuro: #1E8449; 
     --dourado: #D4AF37; 
@@ -15,7 +16,7 @@ body {
     color: var(--texto-claro);
 }
 
-/* --- CABEÇALHO E LOGO --- */
+/* --- CABEÇALHO --- */
 header {
     background-color: var(--azul-card);
     padding: 1rem 2rem;
@@ -24,35 +25,16 @@ header {
     align-items: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }  
-/* --- ESTILO DA IMAGEM DA META --- */
-.img-meta {
-    width: 100%; /* Ocupa toda a largura do cartão */
-    height: 120px; /* Define uma altura fixa */
-    object-fit: cover; /* Corta a imagem perfeitamente sem amassar ou distorcer */
-    border-radius: 8px; /* Arredonda as bordas para combinar com o resto */
-    margin-bottom: 10px; /* Dá um espacinho entre a foto e a barra de progresso */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */ 
-    
-}
 
-/* Agrupa a logo e o título, e adiciona o rodapé verde */
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 15px; /* Espaço entre a logo e o texto */
-    border-bottom: 4px solid var(--verde-folha); /* O rodapé verde do título */
+    border-bottom: 4px solid var(--verde-folha); 
     padding-bottom: 10px;
 }
 
-.logo-img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%; /* Deixa a imagem redondinha */
-    box-shadow: 0 0 10px rgba(39, 174, 96, 0.3); /* Um leve brilho na logo */
-}
-
 header h1 {
-    color: var(--dourado);
+    color: var(--verde-folha);
     margin: 0;
     font-size: 1.8rem;
     letter-spacing: 1px;
@@ -80,9 +62,8 @@ main {
     gap: 25px;
     padding: 40px;
     justify-content: center;
-    flex-wrap: wrap;
-}
-
+  
+/* --- CARTÕES COM EFEITO HOVER --- */
 .card {
     background-color: var(--azul-card);
     border-radius: 16px;
@@ -90,6 +71,12 @@ main {
     width: 320px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
     border-top: 4px solid var(--verde-folha);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); 
 }
 
 .card h2 {
@@ -100,20 +87,34 @@ main {
     margin-top: 0;
 }
 
+/* --- ESTILO DA IMAGEM DA META --- */
+.img-meta {
+    width: 100%; 
+    height: 120px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    margin-bottom: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease;
+}
+
+.img-meta:hover {
+    transform: scale(1.03); 
+}
+
 /* --- CAMPOS DE ENTRADA (CABEÇALHOS AZUIS) --- */
 .input-group {
     margin-bottom: 20px;
     text-align: left;
 }
 
-/* O rótulo agora virou um cabeçalho azul colado no input */
 .input-group label {
     display: block;
-    background-color: var(--azul-cabecalho-input); /* Fundo Azul */
+    background-color: var(--azul-cabecalho-input); 
     color: white;
     padding: 10px 15px;
-    margin-bottom: 0; /* Remove a margem para colar no input abaixo */
-    border-radius: 8px 8px 0 0; /* Arredonda só em cima */
+    margin-bottom: 0; 
+    border-radius: 8px 8px 0 0; 
     font-size: 0.85rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -123,7 +124,7 @@ main {
     width: 100%;
     box-sizing: border-box; 
     padding: 12px 15px;
-    border-radius: 0 0 8px 8px; /* Arredonda só embaixo */
+    border-radius: 0 0 8px 8px; 
     border: 1px solid var(--azul-cabecalho-input);
     background-color: #08152B; 
     color: white;
@@ -179,8 +180,15 @@ progress {
     border-radius: 6px;
 }
 
-progress::-webkit-progress-value { background-color: var(--verde-folha); border-radius: 6px; }
-progress::-webkit-progress-bar { background-color: #08152B; border-radius: 6px; }
+progress::-webkit-progress-value { 
+    background-color: var(--verde-folha); 
+    border-radius: 6px; 
+}
+
+progress::-webkit-progress-bar { 
+    background-color: #08152B; 
+    border-radius: 6px; 
+}
 
 .legenda-progresso {
     font-size: 0.8rem;
@@ -194,19 +202,146 @@ footer {
     padding: 20px;
     font-size: 0.85rem;
     color: #5C7A99;
+}  flex-wrap: wrap;
 }
 
-/* CORES DINÂMICAS DO JAVASCRIPT */
-.texto-positivo {
-    color: var(--verde-folha) !important; 
-    text-shadow: 0 0 10px rgba(39, 174, 96, 0.4); 
+/* --- CARTÕES COM EFEITO HOVER --- */
+.card {
+    background-color: var(--azul-card);
+    border-radius: 16px;
+    padding: 25px;
+    width: 320px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border-top: 4px solid var(--verde-folha);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.texto-negativo {
-    color: #E74C3C !important; 
-    text-shadow: 0 0 10px rgba(231, 76, 60, 0.4); 
+.card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); 
 }
 
-.texto-neutro {
-    color: var(--dourado) !important; 
+.card h2 {
+    color: var(--texto-claro);
+    font-size: 1.3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* --- ESTILO DA IMAGEM DA META --- */
+.img-meta {
+    width: 100%; 
+    height: 120px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    margin-bottom: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease;
+}
+
+.img-meta:hover {
+    transform: scale(1.03); 
+}
+
+/* --- CAMPOS DE ENTRADA (CABEÇALHOS AZUIS) --- */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    background-color: var(--azul-cabecalho-input); 
+    color: white;
+    padding: 10px 15px;
+    margin-bottom: 0; 
+    border-radius: 8px 8px 0 0; 
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.input-group input {
+    width: 100%;
+    box-sizing: border-box; 
+    padding: 12px 15px;
+    border-radius: 0 0 8px 8px; 
+    border: 1px solid var(--azul-cabecalho-input);
+    background-color: #08152B; 
+    color: white;
+    font-size: 1rem;
+}
+
+.btn-calcular {
+    width: 100%;
+    background-color: var(--verde-folha);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.3s ease, transform 0.1s;
+}
+
+.btn-calcular:hover {
+    background-color: var(--verde-escuro);
+}
+
+.btn-calcular:active {
+    transform: scale(0.98); 
+}
+
+/* --- ESTILO DOS RESULTADOS E METAS --- */
+.resumo-valores {
+    background-color: #08152B;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.resumo-valores dt {
+    font-size: 0.9rem;
+    color: #A0B2C6;
+}
+
+.resumo-valores .destaque {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--dourado); 
+    margin: 5px 0 0 0;
+    transition: color 0.3s;
+}
+
+progress {
+    width: 100%;
+    height: 12px;
+    border-radius: 6px;
+}
+
+progress::-webkit-progress-value { 
+    background-color: var(--verde-folha); 
+    border-radius: 6px; 
+}
+
+progress::-webkit-progress-bar { 
+    background-color: #08152B; 
+    border-radius: 6px; 
+}
+
+.legenda-progresso {
+    font-size: 0.8rem;
+    color: #A0B2C6;
+    text-align: right;
+    margin-top: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.85rem;
+    color: #5C7A99;
 }
