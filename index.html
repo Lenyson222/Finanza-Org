@@ -4,7 +4,222 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finanza Org - Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --azul-fundo: #0B1D3A; 
+            --azul-card: #142B4E;  
+            --azul-cabecalho-input: #1A3A6C;
+            --verde-folha: #27AE60; 
+            --verde-escuro: #1E8449; 
+            --dourado: #D4AF37; 
+            --texto-claro: #E0E6ED; 
+        }
+
+        /* Centraliza o aplicativo na tela */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--azul-fundo);
+            color: var(--texto-claro);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* O "quadro" em volta de todo o layout */
+        .dashboard-container {
+            background-color: #061124; 
+            width: 100%;
+            max-width: 950px; 
+            border-radius: 16px;
+            padding: 30px 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+        }
+
+        /* --- CABEÇALHO --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05); 
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px; 
+            border-bottom: 4px solid var(--verde-folha); 
+            padding-bottom: 10px;
+        }
+
+        /* Título do cabeçalho agora é verde */
+        header h1 {
+            color: var(--verde-folha);
+            margin: 0;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+
+        header a {
+            color: var(--texto-claro);
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        header a:hover {
+            color: var(--verde-folha);
+        }
+
+        /* --- ÁREA PRINCIPAL --- */
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 25px;
+        }
+
+        .card {
+            background-color: var(--azul-card);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.03); 
+        }
+
+        .card h2 {
+            color: var(--texto-claro);
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        /* --- ESTILO DA IMAGEM DA META --- */
+        .img-meta {
+            width: 100%; 
+            height: 140px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            margin-bottom: 15px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+        }
+
+        /* --- CAMPOS DE ENTRADA E BOTÃO --- */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            background-color: var(--azul-cabecalho-input); 
+            color: white;
+            padding: 10px 15px;
+            margin-bottom: 0; 
+            border-radius: 8px 8px 0 0; 
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .input-group input {
+            width: 100%;
+            box-sizing: border-box; 
+            padding: 12px 15px;
+            border-radius: 0 0 8px 8px; 
+            border: 1px solid var(--azul-cabecalho-input);
+            background-color: #08152B; 
+            color: white;
+            font-size: 1rem;
+        }
+
+        .btn-calcular {
+            width: 100%;
+            background-color: var(--verde-folha);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.1s;
+        }
+
+        .btn-calcular:hover {
+            background-color: var(--verde-escuro);
+        }
+
+        .btn-calcular:active {
+            transform: scale(0.98); 
+        }
+
+        /* --- RESULTADOS E PROGRESSO --- */
+        .resumo-valores {
+            background-color: #08152B;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .resumo-valores dt {
+            font-size: 0.9rem;
+            color: #A0B2C6;
+        }
+
+        .resumo-valores .destaque {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--dourado); 
+            margin: 5px 0 0 0;
+        }
+
+        progress {
+            width: 100%;
+            height: 12px;
+            border-radius: 6px;
+        }
+
+        progress::-webkit-progress-value { background-color: var(--verde-folha); border-radius: 6px; }
+        progress::-webkit-progress-bar { background-color: #08152B; border-radius: 6px; }
+
+        .legenda-progresso {
+            font-size: 0.8rem;
+            color: #A0B2C6;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.85rem;
+            color: #5C7A99;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr; 
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -12,8 +227,7 @@
         
         <header>
             <div class="logo-container">
-                <img src="image_60d3c3.jpg" alt="Logo Finanza Org" class="logo-img">
-                <h1>FINANZA <span>ORG</span></h1>
+                <h1>FINANZA ORG</h1>
             </div>
             
             <nav>
@@ -62,30 +276,5 @@
 
     </div>
 
-    <script>
-        const inputSalario = document.getElementById('salario');
-        const inputDespesas = document.getElementById('despesas');
-        const btnCalcular = document.getElementById('btn-calcular');
-        const resultadoSobra = document.getElementById('resultado-sobra');
-
-        btnCalcular.addEventListener('click', function() {
-            const valorSalario = parseFloat(inputSalario.value) || 0;
-            const valorDespesas = parseFloat(inputDespesas.value) || 0;
-            const sobra = valorSalario - valorDespesas;
-
-            const valorFormatado = sobra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            resultadoSobra.textContent = valorFormatado;
-
-            resultadoSobra.classList.remove('texto-positivo', 'texto-negativo', 'texto-neutro');
-
-            if (sobra > 0) {
-                resultadoSobra.classList.add('texto-positivo');
-            } else if (sobra < 0) {
-                resultadoSobra.classList.add('texto-negativo');
-            } else {
-                resultadoSobra.classList.add('texto-neutro');
-            }
-        });
-    </script>
 </body>
 </html>
