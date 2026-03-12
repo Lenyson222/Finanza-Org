@@ -1,347 +1,238 @@
+/* =========================================
+   1. IMPORTAÇÕES E VARIÁVEIS DE CORES
+========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
 
 :root {
-    --azul-fundo: #0B1D3A; 
-    --azul-card: #142B4E;  
-    --azul-cabecalho-input: #1A3A6C; 
-    --verde-folha: #27AE60; 
-    --verde-escuro: #1E8449; 
-    --dourado: #D4AF37; 
-    --texto-claro: #E0E6ED; 
+    /* Cores de Fundo */
+    --bg-base: #101012; 
+    --bg-surface: rgba(28, 28, 32, 0.7); 
+    
+    /* Cores do Texto */
+    --text-main: #f0f0f5; 
+    --text-muted: #9a9ab0; 
+    
+    /* Cores de Destaque */
+    --accent-blue: #33e0ff; 
+    --accent-green: #33ffb8; 
+    --accent-red: #ff6677; 
+    
+    /* Outros */
+    --border-light: rgba(255, 255, 255, 0.12); 
+    --radius-md: 12px;
+    --transition: all 0.3s ease;
+    
+    /* Efeitos de brilho */
+    --glow-red: rgba(255, 102, 119, 0.25);
+    --glow-green: rgba(51, 255, 184, 0.25);
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--azul-fundo);
-    color: var(--texto-claro);
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* --- CABEÇALHO --- */
-header {
-    background-color: var(--azul-card);
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}  
-
-.logo-container {
+/* =========================================
+   2. TELA DE LOGIN E ANIMAÇÕES
+========================================= */
+#tela-login {
+    height: 100vh;
     display: flex;
     align-items: center;
-    border-bottom: 4px solid var(--verde-folha); 
-    padding-bottom: 10px;
-}
-
-header h1 {
-    color: var(--verde-folha);
-    margin: 0;
-    font-size: 1.8rem;
-    letter-spacing: 1px;
-}
-
-header h1 span {
-    color: var(--verde-folha); 
-}
-
-header a {
-    color: var(--texto-claro);
-    text-decoration: none;
-    margin-left: 15px;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-header a:hover {
-    color: var(--verde-folha);
-}
-
-/* --- ÁREA PRINCIPAL (DASHBOARD) --- */
-main {
-    display: flex;
-    gap: 25px;
-    padding: 40px;
     justify-content: center;
-  
-/* --- CARTÕES COM EFEITO HOVER --- */
-.card {
-    background-color: var(--azul-card);
-    border-radius: 16px;
-    padding: 25px;
-    width: 320px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    border-top: 4px solid var(--verde-folha);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
-.card:hover {
-    transform: translateY(-8px); 
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); 
+.blob {
+    position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.45; z-index: 0;
+}
+.blob-1 { width: 400px; height: 400px; background: var(--accent-blue); top: -100px; left: -100px; }
+.blob-2 { width: 500px; height: 500px; background: var(--accent-green); bottom: -150px; right: -100px; }
+
+.login-card {
+    background: var(--bg-surface); backdrop-filter: blur(16px);
+    border: 1px solid var(--border-light); border-radius: 20px;
+    padding: 40px; text-align: center; width: 90%; max-width: 450px;
+    z-index: 10; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.card h2 {
-    color: var(--texto-claro);
-    font-size: 1.3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 10px;
-    margin-top: 0;
+.login-card h1 { font-size: 24px; margin: 20px 0 10px; }
+.login-card p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; line-height: 1.5; }
+.logo { font-size: 28px; font-weight: 900; letter-spacing: 2px; }
+.badge { background: rgba(51, 224, 255, 0.15); color: var(--accent-blue); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+
+.fade-in-up { animation: fadeInUp 0.8s ease forwards; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =========================================
+   3. BOTÕES GERAIS
+========================================= */
+button {
+    width: 100%; padding: 14px; border-radius: var(--radius-md); border: none;
+    font-family: inherit; font-weight: 600; font-size: 15px;
+    cursor: pointer; transition: var(--transition);
+    display: flex; justify-content: center; align-items: center; gap: 10px;
+}
+button:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+.btn-google { background: #fff; color: #121214; }
+.btn-google img { width: 20px; }
+.btn-guest { background: transparent; border: 1px solid var(--border-light); color: var(--text-main); }
+.btn-blue { background: var(--accent-blue); color: #121214; }
+.btn-green { background: var(--accent-green); color: #121214; }
+.btn-outline-red { background: transparent; border: 1px solid var(--accent-red); color: var(--accent-red); margin-top: 15px; }
+.btn-small { width: auto; padding: 8px 16px; font-size: 13px; }
+.btn-dashed { background: transparent; border: 1px dashed var(--border-light); color: var(--text-muted); margin-top: 15px; }
+
+/* Novos Botões Escuros/Neutros */
+.btn-dark-blue { 
+    background-color: #1a233a; 
+    color: #f0f0f5; 
+    border: 1px solid #2a3b5c; 
+    margin-top: 15px;
+}
+.btn-dark-blue:hover { background-color: #212d4a; border-color: #33e0ff; }
+
+.btn-neutral { 
+    background-color: #2d2d3a; 
+    color: #e1e1e6; 
+    border: 1px solid var(--border-light); 
+}
+.btn-neutral:hover { background-color: #3f3f4e; }
+
+.divider-text { margin: 20px 0; color: var(--text-muted); font-size: 12px; position: relative; }
+.divider-text::before, .divider-text::after { content: ""; position: absolute; top: 50%; width: 40%; height: 1px; background: var(--border-light); }
+.divider-text::before { left: 0; } .divider-text::after { right: 0; }
+
+/* Botão Pontilhado Verde Claro */
+.btn-dashed-green { 
+    background: transparent; 
+    border: 2px dashed var(--accent-green); 
+    color: var(--accent-green); 
+    margin-top: 15px;
+}
+.btn-dashed-green:hover { 
+    background: rgba(51, 255, 184, 0.1); /* Um fundo verde bem suave ao passar o mouse */
+}
+/* =========================================
+   4. DASHBOARD - HEADER E NAVEGAÇÃO
+========================================= */
+.glass-header {
+    background: rgba(18, 18, 20, 0.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light); padding: 15px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 100;
+}
+.glow-text-blue { color: #fff; text-shadow: 0 0 12px rgba(51, 224, 255, 0.6); }
+
+.nav-menu { display: flex; gap: 30px; }
+.nav-menu a {
+    color: var(--text-muted); text-decoration: none; font-weight: 500;
+    cursor: pointer; transition: var(--transition); padding-bottom: 4px; border-bottom: 2px solid transparent;
+}
+.nav-menu a:hover, .nav-menu a.ativo { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+
+.perfil-usuario { display: flex; align-items: center; gap: 15px; }
+.user-name { font-size: 14px; font-weight: 500; }
+.foto-perfil { width: 40px; height: 40px; border-radius: 50%; border: 2.5px solid var(--accent-blue); }
+
+/* =========================================
+   5. ESTRUTURA DO DASHBOARD
+========================================= */
+.main-content { 
+    width: 100%; max-width: 1500px; 
+    margin: 0 auto; padding: 40px 25px; 
 }
 
-/* --- ESTILO DA IMAGEM DA META --- */
-.img-meta {
+.section-grid {
+    display: grid; 
+    grid-template-columns: 2fr 1fr; 
+    gap: 35px;
+    align-items: start; 
+}
+
+.card, .glass-card {
+    background: var(--bg-surface); border: 1px solid var(--border-light);
+    border-radius: var(--radius-md); padding: 28px; margin-bottom: 25px;
+    backdrop-filter: blur(10px);
     width: 100%; 
-    height: 120px; 
-    object-fit: cover; 
-    border-radius: 8px; 
-    margin-bottom: 10px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    transition: transform 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-.img-meta:hover {
-    transform: scale(1.03); 
-}
+.sub-aba { display: none; width: 100%; }
+.sub-aba.ativa { display: block; animation: fadeInUp 0.4s ease forwards; }
 
-/* --- CAMPOS DE ENTRADA (CABEÇALHOS AZUIS) --- */
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
+.card-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.card-title { font-size: 19px; font-weight: 600; margin-bottom: 20px; }
 
-.input-group label {
-    display: block;
-    background-color: var(--azul-cabecalho-input); 
-    color: white;
-    padding: 10px 15px;
-    margin-bottom: 0; 
-    border-radius: 8px 8px 0 0; 
-    font-size: 0.85rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
+/* Cores do Texto dinâmicas */
+.text-green { color: var(--accent-green); }
+.text-blue { color: var(--accent-blue); }
+.text-red { color: var(--accent-red); }
+.text-muted { color: var(--text-muted); }
 
-.input-group input {
-    width: 100%;
-    box-sizing: border-box; 
-    padding: 12px 15px;
-    border-radius: 0 0 8px 8px; 
-    border: 1px solid var(--azul-cabecalho-input);
-    background-color: #08152B; 
-    color: white;
-    font-size: 1rem;
-}
+/* =========================================
+   6. INPUTS E TEXTOS
+========================================= */
+.input-group { margin-bottom: 18px; width: 100%; }
+.uppercase-label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); margin-bottom: 9px; font-weight: 600; }
 
-.btn-calcular {
-    width: 100%;
-    background-color: var(--verde-folha);
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 5px;
-    transition: background-color 0.3s ease, transform 0.1s;
+input, select.custom-select {
+    width: 100%; padding: 15px; border-radius: 8px; border: 1px solid var(--border-light);
+    background: rgba(0,0,0,0.25); color: var(--text-main); font-family: inherit; font-size: 15px;
+    outline: none; transition: var(--transition);
 }
+input:focus, select.custom-select:focus { border-color: var(--accent-blue); background: rgba(51, 224, 255, 0.08); }
 
-.btn-calcular:hover {
-    background-color: var(--verde-escuro);
-}
+.divider { height: 1px; background: var(--border-light); margin: 30px 0; }
+.valor-gigante { font-size: 38px; font-weight: 900; margin-top: 10px; }
+.input-row { display: flex; gap: 15px; align-items: center; margin-bottom: 12px; }
 
-.btn-calcular:active {
-    transform: scale(0.98); 
-}
+/* =========================================
+   7. ELEMENTOS GERADOS PELO JAVASCRIPT
+========================================= */
+.input-flex-1 { flex: 1; } 
+.input-flex-2 { flex: 2; } 
 
-/* --- ESTILO DOS RESULTADOS E METAS --- */
-.resumo-valores {
-    background-color: #08152B;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
+.meta-item {
+    background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-light);
+    border-radius: var(--radius-md); padding: 22px; margin-bottom: 20px;
 }
-
-.resumo-valores dt {
-    font-size: 0.9rem;
-    color: #A0B2C6;
-}
-
-.resumo-valores .destaque {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--dourado); 
-    margin: 5px 0 0 0;
-    transition: color 0.3s;
-}
+.meta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; font-size: 16px; }
+.strong-value { font-weight: 700; font-size: 19px; }
 
 progress {
-    width: 100%;
-    height: 12px;
-    border-radius: 6px;
+    width: 100%; height: 9px; border-radius: 10px; margin-top: 15px;
+    background-color: var(--bg-base); border: 1px solid var(--border-light); overflow: hidden;
+}
+progress::-webkit-progress-bar { background-color: var(--bg-base); }
+progress::-webkit-progress-value { background-color: var(--accent-green); transition: width 0.5s ease; }
+
+/* =========================================
+   8. TELA DO USUÁRIO E GRÁFICOS
+========================================= */
+.user-top-card { margin-bottom: 35px; }
+.user-info-box { display: flex; align-items: center; gap: 30px; }
+.avatar-container { width: 100px; height: 100px; }
+.avatar-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-blue); }
+.user-info-text h2 { font-size: 28px; margin-bottom: 5px; }
+.badge-user { font-size: 13px; font-weight: 600; margin-bottom: 15px; display: inline-block; padding: 4px 10px; border-radius: 12px; background: rgba(51, 224, 255, 0.15); color: var(--accent-blue); }
+
+.graficos-full-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 35px; margin-top: 30px;
 }
 
-progress::-webkit-progress-value { 
-    background-color: var(--verde-folha); 
-    border-radius: 6px; 
-}
-
-progress::-webkit-progress-bar { 
-    background-color: #08152B; 
-    border-radius: 6px; 
-}
-
-.legenda-progresso {
-    font-size: 0.8rem;
-    color: #A0B2C6;
-    text-align: right;
-    margin-top: 5px;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.85rem;
-    color: #5C7A99;
-}  flex-wrap: wrap;
-}
-
-/* --- CARTÕES COM EFEITO HOVER --- */
-.card {
-    background-color: var(--azul-card);
-    border-radius: 16px;
-    padding: 25px;
-    width: 320px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    border-top: 4px solid var(--verde-folha);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-8px); 
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); 
-}
-
-.card h2 {
-    color: var(--texto-claro);
-    font-size: 1.3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 10px;
-    margin-top: 0;
-}
-
-/* --- ESTILO DA IMAGEM DA META --- */
-.img-meta {
-    width: 100%; 
-    height: 120px; 
-    object-fit: cover; 
-    border-radius: 8px; 
-    margin-bottom: 10px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    transition: transform 0.3s ease;
-}
-
-.img-meta:hover {
-    transform: scale(1.03); 
-}
-
-/* --- CAMPOS DE ENTRADA (CABEÇALHOS AZUIS) --- */
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.input-group label {
-    display: block;
-    background-color: var(--azul-cabecalho-input); 
-    color: white;
-    padding: 10px 15px;
-    margin-bottom: 0; 
-    border-radius: 8px 8px 0 0; 
-    font-size: 0.85rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.input-group input {
-    width: 100%;
-    box-sizing: border-box; 
-    padding: 12px 15px;
-    border-radius: 0 0 8px 8px; 
-    border: 1px solid var(--azul-cabecalho-input);
-    background-color: #08152B; 
-    color: white;
-    font-size: 1rem;
-}
-
-.btn-calcular {
-    width: 100%;
-    background-color: var(--verde-folha);
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 5px;
-    transition: background-color 0.3s ease, transform 0.1s;
-}
-
-.btn-calcular:hover {
-    background-color: var(--verde-escuro);
-}
-
-.btn-calcular:active {
-    transform: scale(0.98); 
-}
-
-/* --- ESTILO DOS RESULTADOS E METAS --- */
-.resumo-valores {
-    background-color: #08152B;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-.resumo-valores dt {
-    font-size: 0.9rem;
-    color: #A0B2C6;
-}
-
-.resumo-valores .destaque {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--dourado); 
-    margin: 5px 0 0 0;
-    transition: color 0.3s;
-}
-
-progress {
-    width: 100%;
-    height: 12px;
-    border-radius: 6px;
-}
-
-progress::-webkit-progress-value { 
-    background-color: var(--verde-folha); 
-    border-radius: 6px; 
-}
-
-progress::-webkit-progress-bar { 
-    background-color: #08152B; 
-    border-radius: 6px; 
-}
-
-.legenda-progresso {
-    font-size: 0.8rem;
-    color: #A0B2C6;
-    text-align: right;
-    margin-top: 5px;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.85rem;
-    color: #5C7A99;
+/* =========================================
+   9. RESPONSIVIDADE
+========================================= */
+@media (max-width: 900px) {
+    .section-grid, .graficos-full-grid { grid-template-columns: 1fr; }
+    .glass-header { flex-direction: column; gap: 20px; text-align: center; }
+    .nav-menu { flex-wrap: wrap; justify-content: center; }
+    .input-row { flex-direction: column; }
 }
