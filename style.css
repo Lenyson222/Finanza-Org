@@ -191,7 +191,38 @@ input:focus, select.custom-select:focus { border-color: var(--accent-blue); back
 
 .divider { height: 1px; background: var(--border-light); margin: 30px 0; }
 .valor-gigante { font-size: 38px; font-weight: 900; margin-top: 10px; }
-.input-row { display: flex; gap: 15px; align-items: center; margin-bottom: 12px; }
+.input-row { display: flex; gap: 15px; align-items: center; margin-bottom: 12px; } /* Container de cada despesa */
+.input-row {
+    display: flex;
+    gap: 10px; /* Espaço entre os campos */
+    align-items: center;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+/* Campo do NOME da despesa (Ocupa a maior parte) */
+.input-flex-2 {
+    flex: 3; /* Cresce 3x mais que os outros */
+    min-width: 0; 
+}
+
+/* Campo do VALOR da despesa (Fica em tamanho médio) */
+.input-flex-1 {
+    flex: 1; /* Cresce 1x */
+    min-width: 0;
+}
+
+/* Botão de EXCLUIR (Tamanho fixo, não cresce) */
+.btn-delete {
+    flex: 0 0 auto; /* Proíbe o botão de esticar */
+    width: 35px; /* Tamanho fixo e pequeno */
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+}
 
 /* =========================================
    7. ELEMENTOS GERADOS PELO JAVASCRIPT
@@ -235,4 +266,66 @@ progress::-webkit-progress-value { background-color: var(--accent-green); transi
     .glass-header { flex-direction: column; gap: 20px; text-align: center; }
     .nav-menu { flex-wrap: wrap; justify-content: center; }
     .input-row { flex-direction: column; }
+}
+/* Fundo escuro para as opções da lista de moedas */
+select.custom-select option {
+    background-color: #121214; /* Fundo escuro */
+    color: #f0f0f5; /* Texto claro */
+}
+/* Botão de Excluir (Discreto) */
+.btn-delete {
+    background: transparent;
+    border: none;
+    color: var(--text-muted); /* Cor acinzentada discreta */
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.4; /* Deixa ele bem transparente por padrão */
+    transition: all 0.3s ease;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Efeito ao passar o mouse ou tocar no celular */
+.btn-delete:hover, .btn-delete:active {
+    opacity: 1; /* Fica 100% visível */
+    color: var(--accent-red); /* Fica vermelho */
+    transform: scale(1.2); /* Dá uma leve crescidinha */
+}
+
+/* Ajuste específico para o "X" da Meta (Canto superior direito) */
+.btn-delete-meta {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+/* Garante que o cartão da meta seja a base para o botão flutuar */
+.meta-item {
+    position: relative; 
+    padding-top: 20px; /* Dá um espacinho extra em cima para o X não encostar no texto */
+}
+
+/* O botão X específico das metas */
+.btn-delete-meta {
+    position: absolute;
+    top: 10px;    /* Distância do topo do cartão */
+    right: 10px;  /* Distância da direita do cartão */
+    width: 28px;
+    height: 28px;
+    background: transparent; /* Fica sem fundo para ser mais discreto */
+    color: #ff6677; /* Cor vermelha para indicar exclusão */
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+/* Efeito ao passar o mouse por cima do X */
+.btn-delete-meta:hover {
+    background: rgba(255, 102, 119, 0.1); /* Fundo avermelhado bem fraquinho */
 }
