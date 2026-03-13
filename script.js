@@ -207,9 +207,18 @@ window.initCharts = function() {
         type: 'doughnut', 
         data: { 
             labels: [], 
-            datasets: [{ data: [], backgroundColor: ['#33ffb8', '#33e0ff', '#ff6677', '#ffd700', '#a55eea'], borderWidth: 0, hoverOffset: 4 }] 
+            datasets: [{ data: [], backgroundColor: ['#33ffb8', '#33e0ff', '#ff6677', '#ffd700', '#a55eea', '#ff9f43'], borderWidth: 0, hoverOffset: 4 }] 
         }, 
-        options: { plugins: { legend: { position: 'bottom', labels: { color: '#f0f0f5', font: { size: 11 } } } }, cutout: '78%' } 
+        options: { 
+            plugins: { 
+                legend: { 
+                    position: 'right', 
+                    labels: { color: '#f0f0f5', font: { size: 12 }, padding: 15 } 
+                } 
+            }, 
+            cutout: '75%',
+            maintainAspectRatio: false
+        } 
     });
 
     const ctx2 = document.getElementById('graficoLargo').getContext('2d');
@@ -249,7 +258,8 @@ window.initCharts = function() {
                 pointRadius: 4, 
                 pointHoverRadius: 6 
             }] 
-        }, options: { 
+        }, 
+        options: { 
             responsive: true, 
             maintainAspectRatio: false,
             plugins: { legend: { display: false } }, 
@@ -314,7 +324,17 @@ window.calcularTudo = function() {
     });
 
     if(chartDoughnut) { 
-        chartDoughnut.data.labels = window.dados.despesas.map(d => d.nome); 
+        // Calcula o total de gastos para descobrir a porcentagem
+        const totalGastos = window.dados.despesas.reduce((acc, d) => acc + (parseFloat(d.valor) || 0), 0);
+
+        chartDoughnut.data.labels = window.dados.despesas.map(d => {
+            const valor = parseFloat(d.valor) || 0;
+            const porcentagem = totalGastos > 0 ? Math.round((valor / totalGastos) * 100) : 0;
+            
+            // Retorna array para o Chart.js quebrar a linha
+            return [d.nome, `${porcentagem}%`]; 
+        }); 
+
         chartDoughnut.data.datasets[0].data = window.dados.despesas.map(d => d.valor); 
         chartDoughnut.update(); 
     }
@@ -329,7 +349,7 @@ window.renderDespesas = function() {
 }
 
 
-   window.renderMetas = function() {
+window.renderMetas = function() {
     document.getElementById('lista-metas').innerHTML = window.dados.metas.map((m, i) => `
         <div class="meta-item">
             <div class="meta-header">
