@@ -140,6 +140,12 @@ button:hover { transform: translateY(-2px); filter: brightness(1.1); }
 .perfil-usuario { display: flex; align-items: center; gap: 15px; }
 .user-name { font-size: 14px; font-weight: 500; }
 .foto-perfil { width: 40px; height: 40px; border-radius: 50%; border: 2.5px solid var(--accent-blue); }
+/* Ajuste de tamanho para a logo em SVG */
+.logo-svg {
+    width: 50px; /* Você pode aumentar ou diminuir este valor para ajustar o tamanho */
+    height: 50px;
+    margin-right: 15px; /* Espaço entre a logo e o nome FINANZA */
+}
 
 /* =========================================
    5. ESTRUTURA DO DASHBOARD
@@ -328,4 +334,46 @@ select.custom-select option {
 /* Efeito ao passar o mouse por cima do X */
 .btn-delete-meta:hover {
     background: rgba(255, 102, 119, 0.1); /* Fundo avermelhado bem fraquinho */
+}
+/* =========================================
+   10. AJUSTES DA LOGO EM SVG
+========================================= */
+
+/* Logo na tela de login */
+.login-logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.logo-svg-login {
+    width: 100px; 
+    height: 100px;
+    background-color: transparent;
+}
+
+/* Logo no painel (Header) */
+.header-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-svg-header {
+    width: 60px; 
+    height: 60px;
+    background-color: transparent;
+}
+
+/* Garante que o SVG preencha o espaço e dá um zoom para sumir a borda */
+.logo-svg-login svg, 
+.logo-svg-header svg {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    overflow: hidden;
+    transform: scale(1.15); /* Corta aquela borda chata da conversão */
 }
